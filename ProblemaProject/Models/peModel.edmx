@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SisteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="genero">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="precio" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pelicula">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="genero" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="sinopsis" Type="varchar" MaxLength="255" />
+          <Property Name="falta" Type="date" />
+          <Property Name="disponible" Type="bit" />
+          <Property Name="fretorno" Type="date" />
+        </EntityType>
+        <Association Name="FK__pelicula__genero__267ABA7A">
+          <End Role="genero" Type="Self.genero" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="pelicula" Type="Self.pelicula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="genero">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pelicula">
+              <PropertyRef Name="genero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="finRenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="mid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pDisp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="mid" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="id" Type="int" Nullable="false" />
+                <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+                <Property Name="genero" Type="varchar" MaxLength="10" Nullable="false" />
+                <Property Name="sinopsis" Type="varchar" MaxLength="255" />
+                <Property Name="falta" Type="date" />
+                <Property Name="disponible" Type="bit" />
+                <Property Name="precio" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="pRen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="mid" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="id" Type="int" Nullable="false" />
+                <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+                <Property Name="disponible" Type="bit" />
+                <Property Name="fretorno" Type="date" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="Rentar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="mid" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="SisteModelStoreContainer">
+          <EntitySet Name="genero" EntityType="Self.genero" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pelicula" EntityType="Self.pelicula" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__pelicula__genero__267ABA7A" Association="Self.FK__pelicula__genero__267ABA7A">
+            <End Role="genero" EntitySet="genero" />
+            <End Role="pelicula" EntitySet="pelicula" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SisteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="pDisp_Result">
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="genero" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sinopsis" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="falta" Type="DateTime" />
+          <Property Name="disponible" Type="Boolean" />
+          <Property Name="precio" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="pRen_Result">
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="disponible" Type="Boolean" />
+          <Property Name="fretorno" Type="DateTime" />
+        </ComplexType>
+        <EntityType Name="genero">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="precio" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <NavigationProperty Name="peliculas" Relationship="Self.FK__pelicula__genero__267ABA7A" FromRole="genero" ToRole="pelicula" />
+        </EntityType>
+        <EntityType Name="pelicula">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="genero" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sinopsis" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="falta" Type="DateTime" Precision="0" />
+          <Property Name="disponible" Type="Boolean" />
+          <Property Name="fretorno" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="genero1" Relationship="Self.FK__pelicula__genero__267ABA7A" FromRole="pelicula" ToRole="genero" />
+        </EntityType>
+        <Association Name="FK__pelicula__genero__267ABA7A">
+          <End Role="genero" Type="Self.genero" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="pelicula" Type="Self.pelicula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="genero">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pelicula">
+              <PropertyRef Name="genero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SisteEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="generoes" EntityType="Self.genero" />
+          <EntitySet Name="peliculas" EntityType="Self.pelicula" />
+          <AssociationSet Name="FK__pelicula__genero__267ABA7A" Association="Self.FK__pelicula__genero__267ABA7A">
+            <End Role="genero" EntitySet="generoes" />
+            <End Role="pelicula" EntitySet="peliculas" />
+          </AssociationSet>
+          <FunctionImport Name="pDisp" IsComposable="true" ReturnType="Collection(SisteModel.pDisp_Result)">
+            <Parameter Name="mid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pRen" IsComposable="true" ReturnType="Collection(SisteModel.pRen_Result)">
+            <Parameter Name="mid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="finRenta">
+            <Parameter Name="mid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Rentar">
+            <Parameter Name="mid" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SisteModelStoreContainer" CdmEntityContainer="SisteEntities">
+          <EntitySetMapping Name="generoes">
+            <EntityTypeMapping TypeName="SisteModel.genero">
+              <MappingFragment StoreEntitySet="genero">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="peliculas">
+            <EntityTypeMapping TypeName="SisteModel.pelicula">
+              <MappingFragment StoreEntitySet="pelicula">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="genero" ColumnName="genero" />
+                <ScalarProperty Name="sinopsis" ColumnName="sinopsis" />
+                <ScalarProperty Name="falta" ColumnName="falta" />
+                <ScalarProperty Name="disponible" ColumnName="disponible" />
+                <ScalarProperty Name="fretorno" ColumnName="fretorno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionName="SisteModel.Store.pDisp" FunctionImportName="pDisp">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SisteModel.pDisp_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="genero" ColumnName="genero" />
+                <ScalarProperty Name="sinopsis" ColumnName="sinopsis" />
+                <ScalarProperty Name="falta" ColumnName="falta" />
+                <ScalarProperty Name="disponible" ColumnName="disponible" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="SisteModel.Store.pRen" FunctionImportName="pRen">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SisteModel.pRen_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="disponible" ColumnName="disponible" />
+                <ScalarProperty Name="fretorno" ColumnName="fretorno" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="finRenta" FunctionName="SisteModel.Store.finRenta" />
+          <FunctionImportMapping FunctionImportName="Rentar" FunctionName="SisteModel.Store.Rentar" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

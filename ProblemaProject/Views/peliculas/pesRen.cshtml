@@ -1,0 +1,48 @@
+﻿@model ProblemaProject.Models.pRen_Result
+
+@{
+    ViewBag.Title = "pesRen";
+}
+
+<div>
+    <h4>La película se encuentra rentada</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.disponible)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.disponible)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fretorno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fretorno)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Terminar Renta" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+
+</div>
+

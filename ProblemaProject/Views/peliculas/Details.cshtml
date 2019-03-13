@@ -1,0 +1,66 @@
+﻿@model ProblemaProject.Models.pelicula
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>pelicula</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sinopsis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sinopsis)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.falta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.falta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.disponible)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.disponible)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fretorno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fretorno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.genero1.id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.genero1.id)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
