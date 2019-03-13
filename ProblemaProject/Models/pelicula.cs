@@ -22,12 +22,12 @@ namespace ProblemaProject.Models
         public string sinopsis { get; set; }
         [Display(Name = "Fecha de Alta")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> falta { get; set; }
         public Nullable<bool> disponible { get; set; }
         [Display(Name = "Fecha de Retorno")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> fretorno { get; set; }
         [Display(Name = "Genero")]
         public virtual genero genero1 { get; set; }

@@ -18,6 +18,23 @@ namespace ProblemaProject.Controllers
         // GET: peliculas
         public ActionResult Index()
         {
+            if(!db.generoes.Any())
+            {
+                
+                var ge = new genero[]
+                {
+                    new genero{id="comedia",precio=20},
+                    new genero{id="terror",precio=50},
+                    new genero{id="drama",precio=100},
+                    new genero{id="adulto",precio=500}
+                };
+                foreach(genero r in ge)
+                {
+                    db.generoes.Add(r);
+                }//foreach
+                db.SaveChanges();
+            }//if generoes is empty
+            //
             var peliculas = db.peliculas.Include(p => p.genero1);
             return View(peliculas.ToList());
         }
